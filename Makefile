@@ -18,10 +18,10 @@ BI		:= cd.c \
 		   exit.c \
 		   unset.c \
 		   export.c \
-		   
+
 
 OBJ     := $(SRC:%.c=$(OBJ_DIR)/%.o)
-		   
+
 OBJ_BI	:= $(BI:%.c=$(OBJ_DIR)/%.o)
 
 GREEN   := \033[1;32m
@@ -31,7 +31,7 @@ LIB     := make -sC libft
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(OBJ_BI)	
+$(NAME): $(OBJ) $(OBJ_BI)
 	@$(LIB)
 	@$(CC) $(OBJ) $(OBJ_BI) $(LIB.A) -o $(NAME) && printf "$(GREEN)✔️ $(NAME)$(NC) compiled\n"
 

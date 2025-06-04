@@ -1,13 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mah-ming <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/04 18:37:10 by tbosviel          #+#    #+#             */
-/*   Updated: 2025/06/04 21:08:01 by mah-ming         ###   ########.fr       */
+/*   Created: 2025/06/04 21:10:08 by mah-ming          #+#    #+#             */
+/*   Updated: 2025/06/04 23:38:08 by mah-ming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#ifndef BULTINS_H
+# define BULTINS_H
+
+int ft_echo(char **args);
+
+// built-in utils
+int ft_n_option(char *args);
+
+#endif

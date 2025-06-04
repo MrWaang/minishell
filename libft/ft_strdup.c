@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbosviel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mah-ming <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 17:04:40 by tbosviel          #+#    #+#             */
-/*   Updated: 2025/02/24 05:24:59 by tbosviel         ###   ########.fr       */
+/*   Updated: 2025/06/04 21:18:50 by mah-ming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,7 @@ char	*ft_strdup(char *src)
 {
 	char	*copy;
 	int		len;
-	int		i;
 
-	i = 0;
 	len = ft_strlen(src);
 	copy = malloc(sizeof(char) * len + 1);
 	if (!copy)

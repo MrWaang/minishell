@@ -3,17 +3,11 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbosviel <marvin@d42.fr>                   +#+  +:+       +#+        */
+/*   By: mah-ming <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 18:19:12 by tbosviel          #+#    #+#             */
-/*   Updated: 2025/06/04 18:19:12 by tbosviel         ###   ########.fr       */
+/*   Updated: 2025/06/04 21:24:02 by mah-ming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/minishell.h"
-
-int	cd(void)
-{
-	printf("cd");
-	return (0);
-}
+#include "../../includes/minishell.h"

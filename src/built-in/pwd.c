@@ -3,11 +3,11 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbosviel <marvin@d42.fr>                   +#+  +:+       +#+        */
+/*   By: mah-ming <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 18:37:18 by tbosviel          #+#    #+#             */
-/*   Updated: 2025/06/04 18:37:18 by tbosviel         ###   ########.fr       */
+/*   Updated: 2025/06/04 21:07:52 by mah-ming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/minishell.h"
+#include "../../includes/minishell.h"
