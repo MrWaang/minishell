@@ -49,9 +49,11 @@ re: fclean all
 
 clean:
 	@rm -rf $(OBJ_DIR)
+	make clean -sC libft
 
 fclean: clean
 	@rm -f $(NAME)
+	make fclean -sC libft
 
 .PHONY:
 	all clean fclean re
