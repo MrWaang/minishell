@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_lstsize_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbosviel <marvin@d42.fr>                   +#+  +:+       +#+        */
+/*   By: tbosviel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/04 18:35:09 by tbosviel          #+#    #+#             */
-/*   Updated: 2025/06/04 18:35:09 by tbosviel         ###   ########.fr       */
+/*   Created: 2024/10/19 04:39:32 by tbosviel          #+#    #+#             */
+/*   Updated: 2024/10/19 04:44:25 by tbosviel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-# include "../libft/libft.h"
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
+int	ft_lstsize(t_list *lst)
+{
+	int	i;
 
-int	cd(void);
-
-#endif
+	i = 0;
+	while (lst)
+	{
+		i++;
+		lst = lst->next;
+	}
+	return (i);
+}

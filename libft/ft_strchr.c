@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbosviel <marvin@d42.fr>                   +#+  +:+       +#+        */
+/*   By: tbosviel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/04 18:35:09 by tbosviel          #+#    #+#             */
-/*   Updated: 2025/06/04 18:35:09 by tbosviel         ###   ########.fr       */
+/*   Created: 2024/10/10 00:33:02 by tbosviel          #+#    #+#             */
+/*   Updated: 2024/10/15 01:20:26 by tbosviel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+char	*ft_strchr(const char *str, int searched)
+{
+	int	i;
 
-# include "../libft/libft.h"
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-
-int	cd(void);
-
-#endif
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == (char)searched)
+			return ((char *)&str[i]);
+		i++;
+	}
+	if (str[i] == (char)searched)
+		return ((char *)&str[i]);
+	return (0);
+}

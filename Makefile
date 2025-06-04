@@ -2,39 +2,56 @@ NAME    := minishell
 
 SRC_DIR := src
 OBJ_DIR := obj
+BI_DIR  := $(SRC_DIR)/built-in
 
-CC		:= clang
+CC      := clang
 CFLAGS  := -Wextra -Wall -Werror
 
 INCLUDE := -I ./include
 
-SRC             :=
-OBJ             := $(SRC:%.c=$(OBJ_DIR)/%.o)
+SRC     := main.c
+
+BI		:= cd.c \
+		   pwd.c \
+		   env.c \
+		   echo.c \
+		   exit.c \
+		   unset.c \
+		   export.c \
+		   
+
+OBJ     := $(SRC:%.c=$(OBJ_DIR)/%.o)
+		   
+OBJ_BI	:= $(BI:%.c=$(OBJ_DIR)/%.o)
 
 GREEN   := \033[1;32m
-NC              := \033[0m
+NC      := \033[0m
 
-LIB     := make -sC mlx
-LIB.A   := mlx/libmlx_Linux.a
-
-ifdef DEBUG
-CFLAGS += -g
-endif
+LIB     := make -sC libft
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-        @$(LIB)
-        @$(CC) $(OBJ) $(LIB.A) -lXext -lX11 -lm -lz -o $(NAME) && printf "$(GREEN)✔️ $(NAME)$(NC) compiled\n"
+$(NAME): $(OBJ) $(OBJ_BI)	
+	@$(LIB)
+	@$(CC) $(OBJ) $(OBJ_BI) $(LIB.A) -o $(NAME) && printf "$(GREEN)✔️ $(NAME)$(NC) compiled\n"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-        @mkdir -p $(OBJ_DIR)
-        @$(CC) $(CFLAGS) -o $@ -c $< $(INCLUDE) && printf "$(GREEN)✔️ $(notdir $<)$(NC) compiled\n"
+	@mkdir -p $(OBJ_DIR)
+	@$(CC) $(CFLAGS) -o $@ -c $< $(INCLUDE) && printf "$(GREEN)✔️ $(notdir $<)$(NC) compiled\n"
+
+$(OBJ_DIR)/%.o: $(BI_DIR)/%.c
+	@mkdir -p $(OBJ_DIR)
+	@$(CC) $(CFLAGS) -o $@ -c $< $(INCLUDE)
+	@printf "$(GREEN)✔️ $(notdir $<)$(NC) compiled\n"
+
+
+re: fclean all
 
 clean:
-        @rm -rf $(OBJ_DIR)
+	@rm -rf $(OBJ_DIR)
 
 fclean: clean
-        @rm -f $(NAME)
+	@rm -f $(NAME)
 
-.PHONY: all clean fclean re
+.PHONY:
+	all clean fclean re
