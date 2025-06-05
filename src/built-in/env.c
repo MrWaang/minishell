@@ -6,13 +6,13 @@
 /*   By: mah-ming <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 18:37:06 by tbosviel          #+#    #+#             */
-/*   Updated: 2025/06/05 22:27:42 by mah-ming         ###   ########.fr       */
+/*   Updated: 2025/06/05 22:49:51 by mah-ming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void    ft_env(char **env)
+int	ft_env(char **env)
 {
     int	i;
 
@@ -25,4 +25,14 @@ void    ft_env(char **env)
 		i++;
 	}
 	return (0);
+}
+
+int env_size(char **env_d)
+{
+	int size;
+
+	size = 0;
+	while (env_d && env_d[size])
+		size++;
+	return (size);
 }
