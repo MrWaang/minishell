@@ -6,7 +6,7 @@
 /*   By: mah-ming <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 18:37:06 by tbosviel          #+#    #+#             */
-/*   Updated: 2025/06/05 18:54:19 by mah-ming         ###   ########.fr       */
+/*   Updated: 2025/06/05 22:27:42 by mah-ming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,15 @@
 
 void    ft_env(char **env)
 {
-    int        i;
-    char    *path;
+    int	i;
 
-    i = 0;
-    path = getenv("PATH");
-    if (!path)
-    {
-        printf("zsh: command not found: env\n");
-        return ;
-    }
-    while (env[i])
-    {
-        printf("%s\n", env[i]);
-        i++;
-    }
-    return ;
+	i = 0;
+	if (!env)
+		return (1);
+	while(env[i])
+	{
+		printf("%s/n", env[i]);
+		i++;
+	}
+	return (0);
 }
