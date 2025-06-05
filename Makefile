@@ -28,6 +28,7 @@ GREEN   := \033[1;32m
 NC      := \033[0m
 
 LIB     := make -sC libft
+LIB.A	:= libft/libft.a
 
 all: $(NAME)
 

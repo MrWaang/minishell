@@ -10,13 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BULTINS_H
-# define BULTINS_H
+#ifndef BUILTINS_H
+# define BUILTINS_H
 
-int 	ft_echo(char **args);
-void    ft_env(char **env);
+int		ft_echo(char **args);
+void	ft_env(char **env);
+int		ft_unset(char **env, char **args);
 
 // built-in utils
-int ft_n_option(char *args);
+int		ft_n_option(char *args);
 
-#endif
+#endif 
