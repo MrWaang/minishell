@@ -5,7 +5,7 @@ OBJ_DIR := obj
 BI_DIR  := $(SRC_DIR)/built-in
 
 CC      := clang
-CFLAGS  := -Wextra -Wall -Werror
+CFLAGS  := -Wextra -Wall -Werror -g
 
 INCLUDE := -I ./include
 
