@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.h                                         :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mah-ming <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/04 21:10:08 by mah-ming          #+#    #+#             */
-/*   Updated: 2025/06/06 15:01:30 by mah-ming         ###   ########.fr       */
+/*   Created: 2025/06/06 14:53:02 by mah-ming          #+#    #+#             */
+/*   Updated: 2025/06/06 15:01:31 by mah-ming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BULTINS_H
-# define BULTINS_H
+#include "../includes/builtins.h"
+#include "../includes/minishell.h"
 
-int 	ft_echo(char **args);
-int   	ft_env(char **env);
+void free_array(char **array)
+{
+	int i;
 
-// echo utils
-int		ft_n_option(char *args); // check l'option -n de echo
-
-// env utils
-int		env_size(char **env_d); // check le nbr de var d'environnement
-char 	**cpy_env(char **c_env); // copie de l'env
-
-#endif
+	i = 0;
+	if (!array)
+		return;
+	while (array[i])
+	{
+		free(array[i]);
+		i++;
+	}
+	free(array);
+}

@@ -6,7 +6,7 @@
 /*   By: mah-ming <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 18:37:06 by tbosviel          #+#    #+#             */
-/*   Updated: 2025/06/05 22:49:51 by mah-ming         ###   ########.fr       */
+/*   Updated: 2025/06/06 15:01:46 by mah-ming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,38 @@ int	ft_env(char **env)
 	return (0);
 }
 
-int env_size(char **env_d)
+int env_size(char **c_env)
 {
 	int size;
 
 	size = 0;
-	while (env_d && env_d[size])
+	while (c_env && c_env[size])
 		size++;
 	return (size);
+}
+
+char **cpy_env(char **c_env)
+{
+	char **new_env;
+	int size;
+	int i;
+
+	i = 0;
+	size = env_size(c_env);
+	new_env = malloc(sizeof(char *) * (size + 1));
+	if (!new_env)
+		return (NULL);
+	while (i < size)
+	{
+		new_env[i] = ft_strdup(c_env[i]);
+		if (!new_env[i])
+		{
+			new_env[i] = NULL;
+			free_array(new_env);
+			return NULL;
+		}
+		i++;
+	}
+	new_env[i] = NULL;
+	return (new_env);
 }

@@ -9,7 +9,7 @@ CFLAGS  := -Wextra -Wall -Werror
 
 INCLUDE := -I ./include
 
-SRC     := main.c
+SRC     := main.c utils.c
 
 BI		:= cd.c \
 		   pwd.c \
