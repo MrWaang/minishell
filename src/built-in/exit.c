@@ -6,8 +6,14 @@
 /*   By: mah-ming <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 18:37:10 by tbosviel          #+#    #+#             */
-/*   Updated: 2025/06/04 21:08:01 by mah-ming         ###   ########.fr       */
+/*   Updated: 2025/06/06 19:56:54 by mah-ming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+void ft_exit(long long int value)
+{
+    printf("exit\n");
+    exit(value);
+}

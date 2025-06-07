@@ -6,7 +6,7 @@
 /*   By: mah-ming <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 18:37:06 by tbosviel          #+#    #+#             */
-/*   Updated: 2025/06/06 15:01:46 by mah-ming         ###   ########.fr       */
+/*   Updated: 2025/06/06 19:56:55 by mah-ming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_env(char **env)
 		return (1);
 	while(env[i])
 	{
-		printf("%s/n", env[i]);
+		printf("%s\n", env[i]);
 		i++;
 	}
 	return (0);
@@ -53,7 +53,6 @@ char **cpy_env(char **c_env)
 		new_env[i] = ft_strdup(c_env[i]);
 		if (!new_env[i])
 		{
-			new_env[i] = NULL;
 			free_array(new_env);
 			return NULL;
 		}
@@ -61,4 +60,28 @@ char **cpy_env(char **c_env)
 	}
 	new_env[i] = NULL;
 	return (new_env);
+}
+
+t_env *init_env(char **c_env)
+{
+	t_env *env;
+
+	env = malloc(sizeof(t_env));
+	if (!env)
+		return (NULL);
+	env->c_env = cpy_env(c_env);
+	if (!env->c_env)
+	{
+		free(env);
+		return (NULL);
+	}
+	return (env);
+}
+
+void free_env(t_env *env)
+{
+	if (!env)
+		return ;
+	free_array(env->c_env);
+	free(env);
 }
