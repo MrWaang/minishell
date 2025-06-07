@@ -18,13 +18,13 @@ int	main(int ac, char **av, char **env)
 	int		i;
 	int		j;
 	int		env_size;
-	char	**test;
+	// char	**test;
 	char	**env_test;
 
 	i = 1;
 	j = 0;
 	env_size = 0;
-	test = malloc(sizeof(char *) * ac);
+	// test = malloc(sizeof(char *) * ac);
 	while (env[env_size])
 		env_size++;
 	env_test = malloc(sizeof(char *) * env_size);
@@ -34,16 +34,16 @@ int	main(int ac, char **av, char **env)
 		j++;
 	}
 	env_test[j] = NULL;
-	while (av[i])
-	{
-		test[i - 1] = ft_strdup(av[i]);
-		i++;
-	}
+	// while (av[i])
+	// {
+		// test[i - 1] = ft_strdup(av[i]);
+		// i++;
+	// }
 	(void)ac;
 	(void)av;
 	(void)env;
 	i = 0;
-	i = ft_unset(env_test, test);
+	i = ft_cd(env_test, av[1]);
 	while (env_test[i])
 	{
 		printf("%s\n", env_test[i]);

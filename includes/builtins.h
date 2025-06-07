@@ -16,8 +16,10 @@
 int		ft_echo(char **args);
 void	ft_env(char **env);
 int		ft_unset(char **env, char **args);
+int		ft_cd(char **env, char *path);
 
 // built-in utils
 int		ft_n_option(char *args);
+int		first_occurrence(char *str, char c);
 
-#endif 
+#endif
