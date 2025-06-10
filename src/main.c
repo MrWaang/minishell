@@ -18,12 +18,18 @@ int	main(int ac, char **av, char **env)
 	int		i;
 	int		j;
 	int		env_size;
-	// char	test[100];
+	char	**test;
 	char	**env_test;
 
 	i = 1;
 	j = 0;
 	env_size = 0;
+	test = malloc(sizeof(char *) * ac);
+	while (av[i])
+	{
+		test[i - 1] = av[i];
+		i++;
+	}
 	while (env[env_size])
 		env_size++;
 	env_test = malloc(sizeof(char *) * env_size);
@@ -37,12 +43,12 @@ int	main(int ac, char **av, char **env)
 	(void)av;
 	(void)env;
 	i = 0;
-	i = ft_cd(env_test, av[1]);
-	while (env_test[i])
-	{
-		printf("%s\n", env_test[i]);
-		i++;
-	}
+	i = ft_export(env_test, test);
+	// while (env_test[i])
+	// {
+	// printf("%s\n", env_test[i]);
+	// i++;
+	// }
 	// printf("%s\n", getcwd(test, 100));
 	return (0);
 }
