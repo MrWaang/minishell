@@ -32,7 +32,7 @@ int	main(int ac, char **av, char **env)
 	}
 	while (env[env_size])
 		env_size++;
-	env_test = malloc(sizeof(char *) * env_size);
+	env_test = malloc(sizeof(char *) * env_size + 4);
 	while (j < env_size)
 	{
 		env_test[j] = ft_strdup(env[j]);
@@ -44,11 +44,11 @@ int	main(int ac, char **av, char **env)
 	(void)env;
 	i = 0;
 	i = ft_export(env_test, test);
-	// while (env_test[i])
-	// {
-	// printf("%s\n", env_test[i]);
-	// i++;
-	// }
+	while (env_test[i])
+	{
+	printf("%s\n", env_test[i]);
+	i++;
+	}
 	// printf("%s\n", getcwd(test, 100));
 	return (0);
 }
