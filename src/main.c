@@ -18,13 +18,12 @@ int	main(int ac, char **av, char **env)
 	int		i;
 	int		j;
 	int		env_size;
-	// char	**test;
+	// char	test[100];
 	char	**env_test;
 
 	i = 1;
 	j = 0;
 	env_size = 0;
-	// test = malloc(sizeof(char *) * ac);
 	while (env[env_size])
 		env_size++;
 	env_test = malloc(sizeof(char *) * env_size);
@@ -34,11 +33,6 @@ int	main(int ac, char **av, char **env)
 		j++;
 	}
 	env_test[j] = NULL;
-	// while (av[i])
-	// {
-		// test[i - 1] = ft_strdup(av[i]);
-		// i++;
-	// }
 	(void)ac;
 	(void)av;
 	(void)env;
@@ -49,5 +43,6 @@ int	main(int ac, char **av, char **env)
 		printf("%s\n", env_test[i]);
 		i++;
 	}
+	// printf("%s\n", getcwd(test, 100));
 	return (0);
 }
