@@ -6,7 +6,7 @@
 /*   By: mah-ming <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 18:19:12 by tbosviel          #+#    #+#             */
-/*   Updated: 2025/06/05 18:50:46 by mah-ming         ###   ########.fr       */
+/*   Updated: 2025/06/10 05:53:39 by tbosviel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,20 @@ void	update_pwd(char **env)
 		i++;
 	}
 	return ;
+}
+
+char	*find_var(char **env, char *name)
+{
+	int	i;
+
+	i = 0;
+	while (env[i])
+	{
+		if (ft_strncmp(env[i], name, first_occurrence(env[i], '=')) == 0)
+			return (env[i]);
+		i++;
+	}
+	return (NULL);
 }
 
 int	ft_cd(char **env, char *path)
