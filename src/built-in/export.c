@@ -74,7 +74,9 @@ int	check_export_args(char **env, char **args)
 {
 	int	i;
 	int	fail;
+	int	j;
 
+	j = 0;
 	fail = 0;
 	i = 0;
 	while (args[i])
@@ -85,8 +87,14 @@ int	check_export_args(char **env, char **args)
 			write(2, "export: not an identifier: ", 27);
 			write(2, args[i], ft_strlen(args[i]));
 		}
-		else
-			add_to_env(env, args[i]);
+		while (args[i][j])
+		{
+			if (ft_isalpha(args[i][j]) == 0 && args[i][j] != '_')
+				
+			j++;
+		}
+		j = 0;
+		add_to_env(env, args[i]);
 		i++;
 	}
 	return (fail);

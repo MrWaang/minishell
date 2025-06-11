@@ -18,16 +18,21 @@ void	update_oldpwd(char **env)
 	char	*pwd;
 
 	i = 0;
+	pwd = NULL;
 	while (env[i])
 	{
 		if (ft_strncmp(env[i], "PWD", first_occurrence(env[i], '=')) == 0)
 			pwd = ft_strdup(env[i]);
-		if (ft_strncmp(env[i], "OLDPWD", first_occurrence(env[i], '=')) == 0)
+		if (pwd != NULL && ft_strncmp(env[i], "OLDPWD", first_occurrence(env[i],
+					'=')) == 0)
 		{
+			free(env[i]);
+			env[i] = NULL;
 			env[i] = ft_strjoin("OLD", pwd);
 		}
 		i++;
 	}
+	free(pwd);
 	return ;
 }
 
@@ -44,6 +49,8 @@ void	update_pwd(char **env)
 		if (ft_strncmp(env[i], "PWD", first_occurrence(env[i], '=')) == 0)
 		{
 			pwd = getcwd(cwd, 100);
+			free(env[i]);
+			env[i] = NULL;
 			env[i] = ft_strjoin("PWD=", pwd);
 		}
 		i++;
