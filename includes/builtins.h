@@ -10,18 +10,24 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BULTINS_H
-# define BULTINS_H
+#ifndef BUILTINS_H
+# define BUILTINS_H
 
-#include "minishell.h"
+# include "minishell.h"
 
-int 	ft_echo(char **args);
-int   	ft_env(t_env *env);
-int 	ft_pwd(void);
-void    ft_exit(long long int value);
+int		ft_echo(char **args);
+int		ft_env(t_env *env);
+int		ft_pwd(void);
+void	ft_exit(long long int value);
+int		ft_unset(char **env, char **args);
+int		ft_cd(char **env, char *path);
+int		ft_export(char **env, char **args);
 
 // echo utils
 int		ft_n_option(char *args); // check l'option -n de echo
+
+// built-in utils
+int		first_occurrence(char *str, char c);
 
 // env utils
 t_env_node *create_node(char *line);
