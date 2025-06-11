@@ -14,8 +14,6 @@
 
 int	main(int ac, char **av, char **env)
 {
-	(void)ac;
-	(void)av;
 	t_env *c_env;
 
 	c_env = init_env(env);
