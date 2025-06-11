@@ -31,22 +31,25 @@ void	append_to_env(char **env, char *arg, int env_size)
 	char	*tmp;
 
 	j = 0;
-	tmp = ft_strdup(arg + (first_occurrence(env[j], '=') + 1));
-	while (arg[j] == '=')
+	tmp = ft_strdup(arg + first_occurrence(arg, '=') + 1);
+	while (arg[j] != '+')
 	{
-		if (arg[j] != '+')
-			arg[j] = arg[j];
-		else
-			arg[j] = arg[j + 1];
+		arg[j] = arg[j];
 		j++;
 	}
+	arg[j] = '=';
+	arg[j + 1] = '\0';
 	j = 0;
-	if (ft_strncmp(env[j], arg, first_occurrence(env[j], '=')) == 0)
+	while (env[j])
 	{
-		env[j] = ft_strjoin(env[j], tmp);
+		if (ft_strncmp(env[j], arg, first_occurrence(arg, '+')) == 0)
+		{
+			env[j] = ft_strjoin(env[j], tmp);
+			return ;
+		}
+		j++;
 	}
-	else
-		env[env_size] = ft_strjoin(arg, tmp);
+	env[env_size] = ft_strjoin(arg, tmp);
 	return ;
 }
 
