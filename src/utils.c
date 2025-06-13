@@ -6,7 +6,7 @@
 /*   By: mah-ming <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:53:02 by mah-ming          #+#    #+#             */
-/*   Updated: 2025/06/11 19:17:26 by mah-ming         ###   ########.fr       */
+/*   Updated: 2025/06/12 21:31:42 by mah-ming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,22 @@ void free_env_list(t_env *env)
 	{
 		next = main->next;
 		free(main->line);
+		free(main);
+		main = next;
+	}
+}
+
+void free_token_list(t_token *head)
+{
+	t_token *main;
+	t_token *next;
+
+	main = head;
+	while (main)
+	{
+		next = main->next;
+		if (main->value)
+			free(main->value);
 		free(main);
 		main = next;
 	}

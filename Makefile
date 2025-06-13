@@ -9,7 +9,9 @@ CFLAGS  := -Wextra -Wall -Werror -g
 
 INCLUDE := -I ./include
 
-SRC     := main.c utils.c
+SRC     := main.c \
+		   utils.c \
+		   parsing/lexer/token_create.c \
 
 BI		:= cd.c \
 		   pwd.c \
@@ -37,7 +39,7 @@ $(NAME): $(OBJ) $(OBJ_BI)
 	@$(CC) $(OBJ) $(OBJ_BI) $(LIB.A) -o $(NAME) && printf "$(GREEN)✔️ $(NAME)$(NC) compiled\n"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -o $@ -c $< $(INCLUDE) && printf "$(GREEN)✔️ $(notdir $<)$(NC) compiled\n"
 
 $(OBJ_DIR)/%.o: $(BI_DIR)/%.c
