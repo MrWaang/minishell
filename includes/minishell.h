@@ -14,7 +14,7 @@
 # define MINISHELL_H
 
 # include "../libft/libft.h"
-#include "structures.h"
+# include "structures.h"
 # include "builtins.h"
 # include <stdio.h>
 # include <stdlib.h>
@@ -24,7 +24,7 @@
 // t_token *create_token(char *value, t_token_type type);
 
 // fonction cas d'erreur
-void 	free_array(char **array); // free un tableau
-void 	free_env_list(t_env *env); // free liste chainés
+void	free_array(char **array);  // free un tableau
+void	free_env_list(t_env *env); // free liste chainés
 
 #endif

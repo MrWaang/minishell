@@ -42,4 +42,5 @@ void free_env_list(t_env *env)
 		free(main);
 		main = next;
 	}
+	free(env);
 }

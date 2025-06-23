@@ -39,7 +39,7 @@ void	update_oldpwd(char **env)
 void	update_pwd(char **env)
 {
 	int		i;
-	char	cwd[100];
+	char	cwd[100];//FIX je sais pas 
 	char	*pwd;
 
 	i = 0;
