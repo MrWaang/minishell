@@ -42,7 +42,9 @@ int	main(int ac, char **av, char **env)
 		// printf("Vous avez tapé : %s\n", input);
 		// free(input); // Libération mémoire
 	// }
-	ft_export(c_env, args);
+	// ft_export(c_env, args);
+	// ft_unset(c_env, args);
+	ft_cd(c_env, args[0]);
 	ft_env(c_env);
 	i -= 1;
 	while (i >= 0)
