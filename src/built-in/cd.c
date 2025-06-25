@@ -12,23 +12,36 @@
 
 #include "../../includes/minishell.h"
 
-void	update_oldpwd(t_env *env)
+char	*get_pwd(t_env *env)
 {
-	char		*pwd;
 	t_env_node	*tmp;
+	char		*pwd;
 
 	pwd = NULL;
 	tmp = env->head;
 	while (tmp)
 	{
-		if (ft_strncmp(tmp->line, "PWD", first_occurrence(tmp->line, '=')) == 0)
+		if (its_env(tmp->line, "PWD", '=') == 0)
 		{
 			pwd = ft_strdup(tmp->line);
 			if (pwd == NULL)
 				exit(1);
 		}
-		if (ft_strncmp(tmp->line, "OLDPWD", first_occurrence(tmp->line,
-					'=')) == 0)
+		tmp = tmp->next;
+	}
+	return (pwd);
+}
+
+void	update_oldpwd(t_env *env)
+{
+	char		*pwd;
+	t_env_node	*tmp;
+
+	pwd = get_pwd(env);
+	tmp = env->head;
+	while (tmp)
+	{
+		if (pwd != NULL && its_env(tmp->line, "OLDPWD", '=') == 0)
 		{
 			free(tmp->line);
 			tmp->line = NULL;
@@ -52,7 +65,7 @@ void	update_pwd(t_env *env)
 	update_oldpwd(env);
 	while (tmp)
 	{
-		if (ft_strncmp(tmp->line, "PWD", first_occurrence(tmp->line, '=')) == 0)
+		if (its_env(tmp->line, "PWD", '=') == 0)
 		{
 			pwd = getcwd(cwd, 100);
 			free(tmp->line);
@@ -64,20 +77,6 @@ void	update_pwd(t_env *env)
 		tmp = tmp->next;
 	}
 	return ;
-}
-
-char	*find_var(t_env *env, char *name)
-{
-	t_env_node	*tmp;
-
-	tmp = env->head;
-	while (tmp)
-	{
-		if (ft_strncmp(tmp->line, name, first_occurrence(tmp->line, '=')) == 0)
-			return (tmp->line);
-		tmp = tmp->next;
-	}
-	return (NULL);
 }
 
 int	ft_cd(t_env *env, char *path)

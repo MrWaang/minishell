@@ -12,16 +12,6 @@
 
 #include "../includes/minishell.h"
 
-int	first_occurrence(char *str, char c)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] && str[i] != c)
-		i++;
-	return (i);
-}
-
 void	free_array(char **array)
 {
 	int	i;
