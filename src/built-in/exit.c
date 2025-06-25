@@ -12,8 +12,36 @@
 
 #include "../../includes/minishell.h"
 
-void	ft_exit(long long int value)
+void	to_exit(long long int values)
 {
 	printf("exit\n");
-	exit(value);
+	exit(values);
+}
+
+int	ft_exit(char **args)
+{
+	int	i;
+
+	i = 0;
+	if (args[0] == NULL)
+		to_exit(0);
+	while (args[0][i])
+	{
+		if (ft_isdigit(args[0][i]) == 0 && args[0][i] != '+'
+			&& args[0][i] != '-')
+		{
+			printf("exit\n");
+			write(2, "numeric argument required\n", 26);
+			exit(255);
+		}
+		i++;
+	}
+	if (args[1])
+	{
+		printf("exit\n");
+		write(2, "too many arguments\n", 19);
+		return (1);
+	}
+	to_exit((unsigned char)ft_atoi(args[0]));
+	return (0);
 }

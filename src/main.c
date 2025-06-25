@@ -12,37 +12,34 @@
 
 #include "../includes/minishell.h"
 
-
 int	main(int ac, char **av, char **env)
 {
+	char	**args;
+
 	// t_env	*c_env;
-	// int		i;
-// 
-	// char	**args;
-	// i = 1;
+	int		i;
+	i = 1;
 	(void)ac;
 	(void)av;
 	(void)env;
 	// c_env = create_env_list(env);
 	// if (!env)
-		// printf("Erreur init_env");
-	// args = malloc(sizeof(char *) * ac);
-	// while (av[i])
-	// {
-	// args[i - 1] = ft_strdup(av[i]);
-	// i++;
-	// }
-	// args[i - 1] = NULL;
-	prompt();
-	print_history();
-	// ft_exit(1);
-	// i -= 1;
-	// while (i >= 0)
-	// {
-	// free(args[i]);
-	// i--;
-	// }
-	// free(args);
+	// printf("Erreur init_env");
+	args = malloc(sizeof(char *) * ac);
+	while (av[i])
+	{
+		args[i - 1] = ft_strdup(av[i]);
+		i++;
+	}
+	args[i - 1] = NULL;
+	ft_exit(args);
+	i -= 1;
+	while (i >= 0)
+	{
+		free(args[i]);
+		i--;
+	}
+	free(args);
 	// free_env_list(c_env);
 	return (0);
 }
