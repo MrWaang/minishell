@@ -37,7 +37,7 @@ void	env_del(t_env *env, int i)
 	free(tmp);
 }
 
-static int	ft_unset_args(t_env *env, char *arg)
+int	ft_unset_args(t_env *env, char *arg)
 {
 	int			i;
 	t_env_node	*tmp;

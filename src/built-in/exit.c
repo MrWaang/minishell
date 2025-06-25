@@ -12,8 +12,8 @@
 
 #include "../../includes/minishell.h"
 
-void ft_exit(long long int value)
+void	ft_exit(long long int value)
 {
-    printf("exit\n");
-    exit(value);
+	printf("exit\n");
+	exit(value);
 }

@@ -30,6 +30,7 @@ int	ft_n_option(char *args); // check l'option -n de echo
 int			its_env(char *env, char *arg, char c);
 int			first_occurrence(char *str, char c);
 char		*find_var(t_env *env, char *name);
+int			ft_unset_args(t_env *env, char *arg);
 
 // env utils
 t_env_node	*create_node(char *line);

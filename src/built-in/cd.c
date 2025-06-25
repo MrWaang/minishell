@@ -32,11 +32,27 @@ char	*get_pwd(t_env *env)
 	return (pwd);
 }
 
+void	create_oldpwd(t_env *env, char *pwd)
+{
+	char		*oldpwd;
+	t_env_node	*tmp;
+
+	oldpwd = ft_strjoin("OLD", pwd);
+	tmp = create_node(oldpwd);
+	if (!tmp)
+		exit(1);
+	free(oldpwd);
+	add_node_to_list(env, tmp);
+	env->size++;
+}
+
 void	update_oldpwd(t_env *env)
 {
 	char		*pwd;
+	int			here;
 	t_env_node	*tmp;
 
+	here = 0;
 	pwd = get_pwd(env);
 	tmp = env->head;
 	while (tmp)
@@ -48,9 +64,12 @@ void	update_oldpwd(t_env *env)
 			tmp->line = ft_strjoin("OLD", pwd);
 			if (!tmp->line)
 				exit(1);
+			here = 1;
 		}
 		tmp = tmp->next;
 	}
+	if (here == 0)
+		create_oldpwd(env, pwd);
 	free(pwd);
 	return ;
 }
@@ -81,17 +100,25 @@ void	update_pwd(t_env *env)
 
 int	ft_cd(t_env *env, char *path)
 {
-	if (path == NULL && getenv("HOME") != NULL)
+	if (path == NULL && find_var(env, "HOME") != NULL)
 	{
 		chdir(getenv("HOME"));
-		update_pwd(env);
+		if (find_var(env, "PWD") != NULL)
+			update_pwd(env);
+		else if (find_var(env, "OLDPWD") != NULL)
+			ft_unset_args(env, find_var(env, "OLDPWD"));
 		return (0);
 	}
+	if (path == NULL)
+		return (1);
 	if (chdir(path) == -1)
 	{
 		write(2, "cd: no such file or directory", 29);
 		return (1);
 	}
-	update_pwd(env);
+	if (find_var(env, "PWD") != NULL)
+		update_pwd(env);
+	else if (find_var(env, "OLDPWD") != NULL)
+		ft_unset_args(env, find_var(env, "OLDPWD"));
 	return (0);
 }
