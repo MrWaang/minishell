@@ -9,7 +9,7 @@ CFLAGS  := -Wextra -Wall -Werror -g
 
 INCLUDE := -I ./include
 
-SRC     := main.c utils.c built_in_utils.c export_utils.c
+SRC     := main.c utils.c built_in_utils.c export_utils.c headler_read_line.c
 
 BI		:= cd.c \
 		   pwd.c \
@@ -34,7 +34,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ) $(OBJ_BI)
 	@$(LIB)
-	@$(CC) $(OBJ) $(OBJ_BI) $(LIB.A) -o $(NAME) && printf "$(GREEN)✔️ $(NAME)$(NC) compiled\n"
+	@$(CC) $(OBJ) $(OBJ_BI) $(LIB.A) -lreadline -o $(NAME) && printf "$(GREEN)✔️ $(NAME)$(NC) compiled\n"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(OBJ_DIR)

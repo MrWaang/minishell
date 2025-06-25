@@ -16,6 +16,8 @@
 # include "../libft/libft.h"
 # include "structures.h"
 # include "builtins.h"
+# include <readline/history.h>
+# include <readline/readline.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -26,5 +28,7 @@
 // fonction cas d'erreur
 void	free_array(char **array);  // free un tableau
 void	free_env_list(t_env *env); // free liste chainés
+void	print_history(void);
+void	prompt(void);
 
 #endif
