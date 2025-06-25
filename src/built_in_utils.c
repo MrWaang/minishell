@@ -15,9 +15,11 @@
 int	its_env(char *env, char *arg, char c)
 {
 	int	n;
+	int	m;
 
 	n = first_occurrence(env, c);
-	if (ft_strncmp(env, arg, n) == 0)
+	m = first_occurrence(arg, c);
+	if (ft_strncmp(env, arg, n) == 0 && n == m)
 		return (0);
 	return (1);
 }
