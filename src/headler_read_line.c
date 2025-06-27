@@ -1,46 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   headler_read_line.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mah-ming <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tbosviel <marvin@d42.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/06 14:53:02 by mah-ming          #+#    #+#             */
-/*   Updated: 2025/06/11 19:17:26 by mah-ming         ###   ########.fr       */
+/*   Created: 2025/06/25 12:22:11 by tbosviel          #+#    #+#             */
+/*   Updated: 2025/06/25 12:22:11 by tbosviel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	free_array(char **array)
+void	print_history(void)
 {
-	int	i;
+	HIST_ENTRY	**h;
+	int			i;
 
 	i = 0;
-	if (!array)
-		return ;
-	while (array[i])
+	h = history_list();
+	if (!h)
 	{
-		free(array[i]);
+		printf("no history\n");
+		return ;
+	}
+	while (h[i])
+	{
+		printf("%d: %s\n", i + history_base, h[i]->line);
 		i++;
 	}
-	free(array);
 }
 
-void	free_env_list(t_env *env)
+void	prompt(void)
 {
-	t_env_node	*main;
-	t_env_node	*next;
+	char	*input;
 
-	if (!env)
-		return ;
-	main = env->head;
-	while (main)
+	while (1)
 	{
-		next = main->next;
-		free(main->line);
-		free(main);
-		main = next;
+		input = readline(">> ");
+		if (!input)
+			break ;
+		if (*input)
+			add_history(input);
+		free(input);
 	}
-	free(env);
 }

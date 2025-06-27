@@ -12,73 +12,113 @@
 
 #include "../../includes/minishell.h"
 
-void	update_oldpwd(char **env)
+char	*get_pwd(t_env *env)
 {
-	int		i;
-	char	*pwd;
+	t_env_node	*tmp;
+	char		*pwd;
 
-	i = 0;
-	while (env[i])
+	pwd = NULL;
+	tmp = env->head;
+	while (tmp)
 	{
-		if (ft_strncmp(env[i], "PWD", first_occurrence(env[i], '=')) == 0)
-			pwd = ft_strdup(env[i]);
-		if (ft_strncmp(env[i], "OLDPWD", first_occurrence(env[i], '=')) == 0)
+		if (its_env(tmp->line, "PWD", '=') == 0)
 		{
-			env[i] = ft_strjoin("OLD", pwd);
+			pwd = ft_strdup(tmp->line);
+			if (pwd == NULL)
+				exit(1);
 		}
-		i++;
+		tmp = tmp->next;
 	}
+	return (pwd);
+}
+
+void	create_oldpwd(t_env *env, char *pwd)
+{
+	char		*oldpwd;
+	t_env_node	*tmp;
+
+	oldpwd = ft_strjoin("OLD", pwd);
+	tmp = create_node(oldpwd);
+	if (!tmp)
+		exit(1);
+	free(oldpwd);
+	add_node_to_list(env, tmp);
+	env->size++;
+}
+
+void	update_oldpwd(t_env *env)
+{
+	char		*pwd;
+	int			here;
+	t_env_node	*tmp;
+
+	here = 0;
+	pwd = get_pwd(env);
+	tmp = env->head;
+	while (tmp)
+	{
+		if (pwd != NULL && its_env(tmp->line, "OLDPWD", '=') == 0)
+		{
+			free(tmp->line);
+			tmp->line = NULL;
+			tmp->line = ft_strjoin("OLD", pwd);
+			if (!tmp->line)
+				exit(1);
+			here = 1;
+		}
+		tmp = tmp->next;
+	}
+	if (here == 0)
+		create_oldpwd(env, pwd);
+	free(pwd);
 	return ;
 }
 
-void	update_pwd(char **env)
+void	update_pwd(t_env *env)
 {
-	int		i;
-	char	cwd[100];
-	char	*pwd;
+	char		*pwd;
+	t_env_node	*tmp;
 
-	i = 0;
+	char cwd[100]; // FIX je sais pas
+	tmp = env->head;
 	update_oldpwd(env);
-	while (env[i])
+	while (tmp)
 	{
-		if (ft_strncmp(env[i], "PWD", first_occurrence(env[i], '=')) == 0)
+		if (its_env(tmp->line, "PWD", '=') == 0)
 		{
 			pwd = getcwd(cwd, 100);
-			env[i] = ft_strjoin("PWD=", pwd);
+			free(tmp->line);
+			tmp->line = NULL;
+			tmp->line = ft_strjoin("PWD=", pwd);
+			if (!tmp->line)
+				exit(1);
 		}
-		i++;
+		tmp = tmp->next;
 	}
 	return ;
 }
 
-char	*find_var(char **env, char *name)
+int	ft_cd(t_env *env, char *path)
 {
-	int	i;
-
-	i = 0;
-	while (env[i])
-	{
-		if (ft_strncmp(env[i], name, first_occurrence(env[i], '=')) == 0)
-			return (env[i]);
-		i++;
-	}
-	return (NULL);
-}
-
-int	ft_cd(char **env, char *path)
-{
-	if (path == NULL && getenv("HOME") != NULL)
+	if (path == NULL && find_var(env, "HOME") != NULL)
 	{
 		chdir(getenv("HOME"));
-		update_pwd(env);
+		if (find_var(env, "PWD") != NULL)
+			update_pwd(env);
+		else if (find_var(env, "OLDPWD") != NULL)
+			ft_unset_args(env, find_var(env, "OLDPWD"));
 		return (0);
 	}
+	if (path == NULL)
+		return (1);
 	if (chdir(path) == -1)
 	{
-		write(2, "cd: no such file or directory:", 30);
-		write(2, path, ft_strlen(path));
+		write(2, "cd: no such file or directory", 29);
 		return (1);
 	}
-	update_pwd(env);
+	if (find_var(env, "PWD") != NULL)
+		update_pwd(env);
+	else if (find_var(env, "OLDPWD") != NULL)
+		ft_unset_args(env, find_var(env, "OLDPWD"));
 	return (0);
 }

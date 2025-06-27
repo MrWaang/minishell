@@ -6,82 +6,83 @@
 /*   By: mah-ming <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 18:37:06 by tbosviel          #+#    #+#             */
-/*   Updated: 2025/06/06 19:56:55 by mah-ming         ###   ########.fr       */
+/*   Updated: 2025/06/11 19:16:01 by mah-ming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	ft_env(char **env)
+int	ft_env(t_env *env)
 {
-    int	i;
+	t_env_node	*main;
 
-	i = 0;
-	if (!env)
+	if (!env || !env->head)
 		return (1);
-	while(env[i])
+	main = env->head;
+	while (main)
 	{
-		printf("%s\n", env[i]);
-		i++;
+		printf("%s\n", main->line);
+		main = main->next;
 	}
 	return (0);
 }
 
-int env_size(char **c_env)
+t_env_node	*create_node(char *line)
 {
-	int size;
+	t_env_node	*new_node;
 
-	size = 0;
-	while (c_env && c_env[size])
-		size++;
-	return (size);
-}
-
-char **cpy_env(char **c_env)
-{
-	char **new_env;
-	int size;
-	int i;
-
-	i = 0;
-	size = env_size(c_env);
-	new_env = malloc(sizeof(char *) * (size + 1));
-	if (!new_env)
+	new_node = malloc(sizeof(t_env_node));
+	if (!new_node)
 		return (NULL);
-	while (i < size)
+	new_node->line = ft_strdup(line);
+	if (!new_node->line)
 	{
-		new_env[i] = ft_strdup(c_env[i]);
-		if (!new_env[i])
-		{
-			free_array(new_env);
-			return NULL;
-		}
-		i++;
+		free(new_node);
+		return (NULL);
 	}
-	new_env[i] = NULL;
-	return (new_env);
+	new_node->next = NULL;
+	return (new_node);
 }
 
-t_env *init_env(char **c_env)
+void	add_node_to_list(t_env *env, t_env_node *new_node)
 {
-	t_env *env;
+	t_env_node	*main;
+
+	if (!env->head)
+	{
+		env->head = new_node;
+		return ;
+	}
+	main = env->head;
+	while (main->next != NULL)
+		main = main->next;
+	main->next = new_node;
+}
+
+t_env	*create_env_list(char **envt)
+{
+	t_env		*env;
+	int			i;
+	t_env_node	*node;
 
 	env = malloc(sizeof(t_env));
 	if (!env)
 		return (NULL);
-	env->c_env = cpy_env(c_env);
-	if (!env->c_env)
+	env->head = NULL;
+	env->size = 0;
+	env->c_env = NULL;
+	i = 0;
+	while (envt[i])
 	{
-		free(env);
-		return (NULL);
+		node = create_node(envt[i]);
+		if (!node)
+		{
+			free_env_list(env);
+			return (NULL);
+		}
+		add_node_to_list(env, node);
+		env->size++;
+		i++;
 	}
 	return (env);
-}
-
-void free_env(t_env *env)
-{
-	if (!env)
-		return ;
-	free_array(env->c_env);
-	free(env);
 }

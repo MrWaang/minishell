@@ -6,31 +6,39 @@
 /*   By: mah-ming <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 21:10:08 by mah-ming          #+#    #+#             */
-/*   Updated: 2025/06/06 19:56:52 by mah-ming         ###   ########.fr       */
+/*   Updated: 2025/06/11 18:43:05 by mah-ming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILTINS_H
 # define BUILTINS_H
 
-int		ft_echo(char **args);
-void	ft_env(char **env);
-int 	ft_pwd(void);
-void    ft_exit(long long int value);
-int		ft_unset(char **env, char **args);
-int		ft_cd(char **env, char *path);
-int		ft_export(char **env, char **args);
+# include "minishell.h"
+
+int			ft_echo(char **args);
+int			ft_env(t_env *env);
+int			ft_pwd(void);
+int			ft_exit(char **args);
+int			ft_unset(t_env *env, char **args);
+int			ft_cd(t_env *env, char *path);
+int			ft_export(t_env *env, char **args);
 
 // echo utils
-int		ft_n_option(char *args); // check l'option -n de echo
+int	ft_n_option(char *args); // check l'option -n de echo
 
 // built-in utils
-int		first_occurrence(char *str, char c);
+int			its_env(char *env, char *arg, char c);
+int			first_occurrence(char *str, char c);
+char		*find_var(t_env *env, char *name);
+int			ft_unset_args(t_env *env, char *arg);
 
 // env utils
-t_env 	*init_env(char **c_env);
-int		env_size(char **env_d); // check le nbr de var d'environnement
-char 	**cpy_env(char **c_env); // copie de l'env
-void 	free_env(t_env *env); // free l'env
+t_env_node	*create_node(char *line);
+void		add_node_to_list(t_env *env, t_env_node *new_node);
+t_env		*create_env_list(char **envt);
+
+// export utils
+void		ft_strccut(char *str, char c);
+int			check_arg(t_env *env, char *arg);
 
 #endif
