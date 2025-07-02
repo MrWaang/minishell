@@ -34,6 +34,6 @@ void	prompt(void);
 char	*find_cmd_path(char *cmd, char **env);
 int		is_built_in(char *cmd);
 int		built_in_headler(char *cmd, char **args, t_env *env);
-void	redir_in(char *filename); // >
-void	redir_in_append(char *filename); // >>
+void	redir_out(char *filename); // >
+void	redir_out_append(char *filename); // >>
 #endif

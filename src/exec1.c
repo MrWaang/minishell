@@ -44,7 +44,7 @@ int	built_in_headler(char *cmd, char **args, t_env *env)
 	return (value);
 }
 
-void	redir_in(char *filename)
+void	redir_out(char *filename)
 {
 	int	fd;
 
@@ -54,7 +54,7 @@ void	redir_in(char *filename)
 	close(fd);
 }
 
-void	redir_in_append(char *filename)
+void	redir_out_append(char *filename)
 {
 	int	fd;
 
