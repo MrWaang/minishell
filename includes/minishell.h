@@ -30,5 +30,8 @@ void	free_array(char **array);  // free un tableau
 void	free_env_list(t_env *env); // free liste chainés
 void	print_history(void);
 void	prompt(void);
+char	*find_cmd_path(char *cmd, char **env);
+int		is_built_in(char *cmd);
+int		built_in_headler(char *cmd, char **args, t_env *env);
 
 #endif

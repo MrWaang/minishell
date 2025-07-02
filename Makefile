@@ -9,7 +9,7 @@ CFLAGS  := -Wextra -Wall -Werror -g
 
 INCLUDE := -I ./include
 
-SRC     := main.c utils.c built_in_utils.c export_utils.c headler_read_line.c
+SRC     := main.c utils.c built_in_utils.c export_utils.c headler_read_line.c find_cmd_path.c exec1.c
 
 BI		:= cd.c \
 		   pwd.c \
