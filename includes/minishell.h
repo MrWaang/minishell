@@ -16,6 +16,7 @@
 # include "../libft/libft.h"
 # include "structures.h"
 # include "builtins.h"
+# include <fcntl.h>
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <stdio.h>
@@ -33,5 +34,6 @@ void	prompt(void);
 char	*find_cmd_path(char *cmd, char **env);
 int		is_built_in(char *cmd);
 int		built_in_headler(char *cmd, char **args, t_env *env);
-
+void	redir_in(char *filename); // >
+void	redir_in_append(char *filename); // >>
 #endif

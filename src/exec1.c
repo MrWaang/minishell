@@ -34,7 +34,7 @@ int	built_in_headler(char *cmd, char **args, t_env *env)
 	else if (!ft_strncmp("env ", cmd, 4))
 		value = ft_env(env);
 	else if (!ft_strncmp("exit ", cmd, 5))
-		value = ft_exit(args);// FIX free tout avant d'exit
+		value = ft_exit(args); // FIX free tout avant d'exit
 	else if (!ft_strncmp("echo ", cmd, 5))
 		value = ft_echo(args);
 	else if (!ft_strncmp("unset ", cmd, 6))
@@ -42,4 +42,24 @@ int	built_in_headler(char *cmd, char **args, t_env *env)
 	else if (!ft_strncmp("export ", cmd, 7))
 		value = ft_export(env, args);
 	return (value);
+}
+
+void	redir_in(char *filename)
+{
+	int	fd;
+
+	fd = 0;
+	fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	dup2(fd, STDOUT_FILENO);
+	close(fd);
+}
+
+void	redir_in_append(char *filename)
+{
+	int	fd;
+
+	fd = 0;
+	fd = open(filename, O_WRONLY | O_CREAT | O_APPEND, 0644);
+	dup2(fd, STDOUT_FILENO);
+	close(fd);
 }

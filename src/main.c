@@ -17,13 +17,12 @@ int	main(int ac, char **av, char **env)
 	char	**args;
 
 	t_env	*c_env;
-	char *cmd;
+	// char *cmd;
 	int		i;
 
-	cmd = "cd ";
+	// cmd = "cd ";
 	i = 1;
 	(void)ac;
-	(void)av;
 	(void)env;
 	c_env = create_env_list(env);
 	if (!env)
@@ -35,11 +34,11 @@ int	main(int ac, char **av, char **env)
 		i++;
 	}
 	args[i - 1] = NULL;
-	if (is_built_in(cmd) == 1)
-	{
-		built_in_headler(cmd, args, c_env);
-		printf("ssalut");
-	}
+	// if (is_built_in(cmd) == 1)
+	// {
+		// built_in_headler(cmd, args, c_env);
+	// }
+	// ft_env(c_env);
 	// char *path = find_cmd_path(args[0], env);
 	// if (path)
 	// {
