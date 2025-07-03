@@ -21,6 +21,7 @@
 # include <readline/readline.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <sys/wait.h>
 # include <unistd.h>
 
 // parsing
@@ -33,7 +34,9 @@ void	print_history(void);
 void	prompt(void);
 char	*find_cmd_path(char *cmd, char **env);
 int		is_built_in(char *cmd);
-int		built_in_headler(char *cmd, char **args, t_env *env);
-void	redir_out(char *filename); // >
+int		built_in_handler(char *cmd, char **args, t_env *env);
+void	redir_out(char *filename);        // >
 void	redir_out_append(char *filename); // >>
+void	redir_in(char *filename);
+void	env_array(t_env *list);
 #endif

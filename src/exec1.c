@@ -22,7 +22,7 @@ int	is_built_in(char *cmd)
 	return (0);
 }
 
-int	built_in_headler(char *cmd, char **args, t_env *env)
+int	built_in_handler(char *cmd, char **args, t_env *env)
 {
 	int	value;
 
@@ -61,5 +61,15 @@ void	redir_out_append(char *filename)
 	fd = 0;
 	fd = open(filename, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	dup2(fd, STDOUT_FILENO);
+	close(fd);
+}
+
+void	redir_in(char *filename)
+{
+	int	fd;
+
+	fd = 0;
+	fd = open(filename, O_RDONLY, 0444);
+	dup2(fd, STDIN_FILENO);
 	close(fd);
 }
