@@ -23,6 +23,7 @@
 # include <stdlib.h>
 # include <sys/wait.h>
 # include <unistd.h>
+# include <limits.h>
 
 // parsing
 // t_token *create_token(char *value, t_token_type type);
@@ -39,4 +40,5 @@ void	redir_out(char *filename);        // >
 void	redir_out_append(char *filename); // >>
 void	redir_in(char *filename);
 void	env_array(t_env *list);
+char	*is_expand(t_env *env, char *str);
 #endif

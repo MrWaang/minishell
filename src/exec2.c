@@ -32,3 +32,21 @@ void	env_array(t_env *list)
 	list->c_env[i] = NULL;
 	return ;
 }
+
+char	*is_expand(t_env *env, char *str)
+{
+	char	*tmp;
+	char	*env_line;
+	int		size;
+
+	tmp = NULL;
+	if (!str)
+		return (NULL);
+	env_line = find_var(env, str);
+	if (!env_line)
+		return (NULL);
+	size = first_occurrence(env_line, '=') + 1;
+	if (env_line)
+		tmp = ft_strdup(env_line + size);
+	return (tmp);
+}
