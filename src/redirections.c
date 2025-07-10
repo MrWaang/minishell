@@ -11,6 +11,10 @@
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+#include <libft/libft.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
 
 void	redir_out(char *filename)
 {
@@ -42,15 +46,26 @@ void	redir_in(char *filename)
 	close(fd);
 }
 
-// void	heredoc(char *delemiter)
-// {
-	// char	*line;
-//
-	// line = NULL;
-	// while (1)
-	// {
-		// write(1, "heredoc> ", 9);
-		// if (ft_strncmp() == 0)
-			// break ;
-	// }
-// }
+void	heredoc(char *delimiter)
+{
+	char	*line;
+	int	fd;
+
+	line = NULL;
+	fd = 0;
+	fd = open("heredoc_tmp.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	while (1)
+	{
+		line = readline("heredoc>");
+		if (!line)
+			break ;
+		if (ft_strcmp(line, delimiter) == 0)
+		{
+			free(line);
+			break ;
+		}
+		write(fd, line, strlen(line));
+		write(fd, "\n", 1);
+		free(line);
+	}
+}

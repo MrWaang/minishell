@@ -1,47 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handler_read_line.c                                :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbosviel <marvin@d42.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/25 12:22:11 by tbosviel          #+#    #+#             */
-/*   Updated: 2025/07/03 15:44:48 by tbosviel         ###   ########.fr       */
+/*   Created: 2025/07/10 18:44:49 by tbosviel          #+#    #+#             */
+/*   Updated: 2025/07/10 18:44:49 by tbosviel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
-
-void	print_history(void)
+int	ft_strcmp(char *s1, char *s2)
 {
-	HIST_ENTRY	**h;
-	int			i;
+	unsigned int	i;
 
 	i = 0;
-	h = history_list();
-	if (!h)
+	while ((s1[i] != '\0' && s2[i] != '\0'))
 	{
-		printf("no history\n");
-		return ;
-	}
-	while (h[i])
-	{
-		printf("%d: %s\n", i + history_base, h[i]->line);
+		if (s1[i] != s2[i])
+		{
+			return (s1[i] - s2[i]);
+		}
 		i++;
 	}
-}
-
-void	ft_readline(char *prompt, char *input)
-{
-	// char	*input;
-
-	while (1)
-	{
-		input = readline(prompt);
-		if (!input)
-			break ;
-		if (*input)
-			add_history(input);
-		free(input);
-	}
+	return (s1[i] - s2[i]);
 }

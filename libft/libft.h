@@ -41,6 +41,7 @@ int					ft_atoi(const char *str);
 size_t				ft_strlcpy(char *dst, char *src, size_t size);
 char				*ft_strdup(char *src);
 int					ft_strncmp(char *s1, char *s2, unsigned int n);
+int					ft_strcmp(char *s1, char *s2);
 char				*ft_strnstr(const char *str, const char *to_find, size_t n);
 int					ft_tolower(int c);
 int					ft_toupper(int c);

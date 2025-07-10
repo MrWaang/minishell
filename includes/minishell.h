@@ -32,7 +32,7 @@
 void	free_array(char **array);  // free un tableau
 void	free_env_list(t_env *env); // free liste chainés
 void	print_history(void);
-void	prompt(void);
+void	ft_readline(char *prompt, char *input);
 char	*find_cmd_path(char *cmd, char **env);
 int		is_built_in(char *cmd);
 int		built_in_handler(char *cmd, char **args, t_env *env);
@@ -42,4 +42,5 @@ void	redir_in(char *filename);
 void	env_array(t_env *list);
 char	*is_expand(t_env *env, char *str);
 void ft_exec(t_data *data, char **cmd, char **env);
+void heredoc(char *delimiter);
 #endif
