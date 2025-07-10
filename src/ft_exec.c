@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+#include <unistd.h>
 
 void	env_array(t_env *list)
 {
@@ -19,7 +20,6 @@ void	env_array(t_env *list)
 
 	i = 0;
 	tmp = list->head;
-	list->c_env = NULL;
 	list->c_env = malloc(sizeof(char *) * (list->size + 1));
 	if (!list->c_env)
 		return ;
@@ -49,4 +49,35 @@ char	*is_expand(t_env *env, char *str)
 	if (env_line)
 		tmp = ft_strdup(env_line + size);
 	return (tmp);
+}
+
+void dup_handler(t_data *data, int fd[2])
+{
+	if (data->blocks_pos != data->blocks )
+		dup2(fd[1], STDOUT_FILENO);
+	if (data->blocks_pos != 1)
+		dup2(data->fd_tmp, STDIN_FILENO);
+}
+
+void ft_exec(t_data *data, char **cmd, char **env)
+{
+	int fd[2];
+	int pid;
+
+	pipe(fd);
+	pid = fork();
+	if (pid == 0)
+	{
+		dup_handler(data, fd);
+		close(fd[1]);
+		close(fd[0]);
+		if (data->fd_tmp)
+			close(data->fd_tmp);
+		execve(find_cmd_path(cmd[0], env), cmd, env);
+	}
+	close(fd[1]);
+	if (data->fd_tmp != -1)
+		close(data->fd_tmp); 
+	data->fd_tmp = fd[0];
+	waitpid(pid, NULL, 0);
 }

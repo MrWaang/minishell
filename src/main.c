@@ -11,16 +11,17 @@
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+#include <libft/ft_printf.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
 
 int	main(int ac, char **av, char **env)
 {
 	char	**args;
-
 	t_env	*c_env;
-	// char *cmd;
 	int		i;
 
-	// cmd = "cd ";
 	i = 1;
 	(void)ac;
 	(void)env;
@@ -45,6 +46,20 @@ int	main(int ac, char **av, char **env)
 		// printf("%s", path);
 		// free(path);
 	// }
+	t_data *data;
+	data = malloc(sizeof(t_data));
+	data->fd_tmp = -1;
+	char *arg[] = {"grep", "^d", NULL};
+	char *arg2[] = {"wc", "-l", NULL};
+	data->blocks = 3;
+	data->blocks_pos = 1;
+	ft_exec(data, args, env);
+	data->blocks_pos = 2;
+	ft_exec(data, arg, env);
+	data->blocks_pos = 3;
+	ft_exec(data, arg2, env);
+	close(data->fd_tmp);
+	free(data);
 	i -= 1;
 	while (i >= 0)
 	{

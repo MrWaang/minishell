@@ -41,4 +41,5 @@ void	redir_out_append(char *filename); // >>
 void	redir_in(char *filename);
 void	env_array(t_env *list);
 char	*is_expand(t_env *env, char *str);
+void ft_exec(t_data *data, char **cmd, char **env);
 #endif

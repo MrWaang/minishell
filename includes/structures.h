@@ -43,3 +43,10 @@ typedef struct s_token
 	struct s_token *prev; // token prescedent,
 							// utile pour les redir apres un pipe
 }						t_token;
+
+typedef struct s_data
+{
+	int blocks; // nombres de blocs de commandes
+	int	blocks_pos; // la position du bloc de commande actuel
+	int fd_tmp;
+}						t_data;
