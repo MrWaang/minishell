@@ -33,8 +33,6 @@ void	print_history(void)
 
 void	ft_readline(char *prompt, char *input)
 {
-	// char	*input;
-
 	while (1)
 	{
 		input = readline(prompt);

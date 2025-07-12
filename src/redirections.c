@@ -51,6 +51,8 @@ void	heredoc(char *delimiter)
 	char	*line;
 	int	fd;
 
+	if (!delimiter)
+		return;
 	line = NULL;
 	fd = 0;
 	fd = open("heredoc_tmp.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
@@ -58,10 +60,14 @@ void	heredoc(char *delimiter)
 	{
 		line = readline("heredoc>");
 		if (!line)
+		{
+			close(fd);
 			break ;
+		}
 		if (ft_strcmp(line, delimiter) == 0)
 		{
 			free(line);
+			close(fd);
 			break ;
 		}
 		write(fd, line, strlen(line));

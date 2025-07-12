@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-static int	test_nbr(int menos, int nbr)
+static int	test_nbr(int state, int nbr)
 {
-	if (menos % 2 == 1)
+	if (state % 2 == 1)
 		return (-nbr);
 	else
 		return (nbr);
@@ -20,27 +20,27 @@ static int	test_nbr(int menos, int nbr)
 
 int	ft_atoi(const char *str)
 {
-	int	menos;
+	int	state;
 	int	i;
 	int	nbr;
 
 	nbr = 0;
 	i = 0;
-	menos = 0;
+	state = 0;
 	while (str[i] == ' ' || str[i] == '\f' || str[i] == '\n' || str[i] == '\r'
 		|| str[i] == '\t' || str[i] == '\v')
 		i++;
 	if (str[i] == '-' || str[i] == '+')
 	{
 		if (str[i] == '-')
-			menos++;
+			state++;
 		i++;
 	}
 	while (str[i] != '\0' && str[i] >= '0' && str[i] <= '9')
 	{
 		nbr = nbr * 10 + str[i] - 48;
 		if (!(str[i + 1] >= '0' && str[i + 1] <= '9'))
-			return (test_nbr(menos, nbr));
+			return (test_nbr(state, nbr));
 		i++;
 	}
 	return (0);

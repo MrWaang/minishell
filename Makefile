@@ -7,7 +7,7 @@ BI_DIR  := $(SRC_DIR)/built-in
 CC      := clang
 CFLAGS  := -Wextra -Wall -Werror -g
 
-INCLUDE := -I ./include
+INCLUDE := -I includes
 
 SRC     := main.c utils.c built_in_utils.c export_utils.c handler_read_line.c find_cmd_path.c redirections.c ft_exec.c
 
