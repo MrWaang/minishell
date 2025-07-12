@@ -6,12 +6,11 @@
 /*   By: mah-ming <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 19:59:47 by mah-ming          #+#    #+#             */
-/*   Updated: 2025/06/12 21:41:25 by mah-ming         ###   ########.fr       */
+/*   Updated: 2025/07/03 21:49:44 by mah-ming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
-
 
 t_token *create_token(char *value, t_token_type type)
 {
@@ -66,5 +65,21 @@ t_token_type token_id(char *value)
 	if (ft_strcmp(value, ">>") == 0)
 		return (TOKEN_D_REDIR);
 	return (TOKEN_WORD);
+}
+
+int get_space_after(char *line, int pos)
+{
+    if (line[pos] && is_whitespace(line[pos]))
+        return (1);
+    return (0);
+}
+
+t_token *find_last_token(t_token *head)
+{
+    if (!head)
+        return (NULL);
+    while (head->next)
+        head = head->next;
+    return (head);
 }
 

@@ -12,6 +12,16 @@ INCLUDE := -I ./include
 SRC     := main.c \
 		   utils.c \
 		   parsing/lexer/token_create.c \
+		   parsing/lexer/lexer.c \
+		   parsing/lexer/lexer_utils.c \
+		   parsing/lexer/quote_utils.c \
+		   parsing/lexer/quote.c \
+		   parsing/expansion/expand_manager.c \
+		   parsing/expansion/expand_quotes.c \
+           parsing/expansion/expand_vars.c \
+           parsing/expansion/expand_utils.c \
+           parsing/expansion/expand_split.c \
+           parsing/expansion/expand_split_utils.c \
 
 BI		:= cd.c \
 		   pwd.c \
