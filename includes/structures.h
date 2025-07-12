@@ -6,7 +6,7 @@
 /*   By: mah-ming <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 19:20:36 by mah-ming          #+#    #+#             */
-/*   Updated: 2025/06/11 18:43:04 by mah-ming         ###   ########.fr       */
+/*   Updated: 2025/07/03 21:49:40 by mah-ming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,19 +34,25 @@ typedef enum token_type
 	TOKEN_EOF        // fin de ligne
 }						t_token_type;
 
-typedef struct s_token
-{
-	char *value;          // valeur, token 1, token 2, ...
-	t_token_type type;    // type du token
-	int space_after;      // gerer les cas echo test1"test2" : test1test2
-	struct s_token *next; // token suivant
-	struct s_token *prev; // token prescedent,
-							// utile pour les redir apres un pipe
-}						t_token;
-
 typedef struct s_data
 {
 	int blocks; // nombres de blocs de commandes
 	int	blocks_pos; // la position du bloc de commande actuel
 	int fd_tmp;
 }						t_data;
+
+typedef struct s_token
+{
+	char 			*value; // valeur, echo, >>, ...
+	t_token_type 	type; // type du token
+	int 			space_after; // gerer les cas echo test1"test2" : test1test2
+	struct s_token 	*next; // token suivant
+	struct s_token	*prev; // token prescedent, utile pour les redir apres un pipe
+}			t_token;
+
+typedef enum e_quote_state
+{
+    QUOTE_NONE,
+    QUOTE_SINGLE,
+    QUOTE_DOUBLE
+}   t_quote_state;

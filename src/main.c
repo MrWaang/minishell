@@ -6,7 +6,7 @@
 /*   By: mah-ming <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 18:37:25 by tbosviel          #+#    #+#             */
-/*   Updated: 2025/06/11 19:16:47 by mah-ming         ###   ########.fr       */
+/*   Updated: 2025/07/12 15:34:36 by mah-ming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-int	main(int ac, char **av, char **env)
+int main(void)
 {
 	char	**args;
 	t_env	*c_env;
