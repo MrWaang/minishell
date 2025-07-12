@@ -12,13 +12,13 @@
 
 #include "../includes/minishell.h"
 
-void free_array(char **array)
+void	free_array(char **array)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!array)
-		return;
+		return ;
 	while (array[i])
 	{
 		free(array[i]);
@@ -27,13 +27,13 @@ void free_array(char **array)
 	free(array);
 }
 
-void free_env_list(t_env *env)
+void	free_env_list(t_env *env)
 {
-	t_env_node *main;
-	t_env_node *next;
+	t_env_node	*main;
+	t_env_node	*next;
 
 	if (!env)
-		return;
+		return ;
 	main = env->head;
 	while (main)
 	{
@@ -42,6 +42,7 @@ void free_env_list(t_env *env)
 		free(main);
 		main = next;
 	}
+	free(env);
 }
 
 void free_token_list(t_token *head)

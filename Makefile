@@ -11,6 +11,9 @@ INCLUDE := -I ./include
 
 SRC     := main.c \
 		   utils.c \
+       built_in_utils.c \
+       export_utils.c \
+       headler_read_line.c \
 		   parsing/lexer/token_create.c \
 		   parsing/lexer/lexer.c \
 		   parsing/lexer/lexer_utils.c \
@@ -18,10 +21,11 @@ SRC     := main.c \
 		   parsing/lexer/quote.c \
 		   parsing/expansion/expand_manager.c \
 		   parsing/expansion/expand_quotes.c \
-           parsing/expansion/expand_vars.c \
-           parsing/expansion/expand_utils.c \
-           parsing/expansion/expand_split.c \
-           parsing/expansion/expand_split_utils.c \
+       parsing/expansion/expand_vars.c \
+       parsing/expansion/expand_utils.c \
+       parsing/expansion/expand_split.c \
+       parsing/expansion/expand_split_utils.c \
+
 
 BI		:= cd.c \
 		   pwd.c \
@@ -46,7 +50,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ) $(OBJ_BI)
 	@$(LIB)
-	@$(CC) $(OBJ) $(OBJ_BI) $(LIB.A) -o $(NAME) && printf "$(GREEN)✔️ $(NAME)$(NC) compiled\n"
+	@$(CC) $(OBJ) $(OBJ_BI) $(LIB.A) -lreadline -o $(NAME) && printf "$(GREEN)✔️ $(NAME)$(NC) compiled\n"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@)

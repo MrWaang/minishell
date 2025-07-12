@@ -14,7 +14,7 @@
 
 int	ft_env(t_env *env)
 {
-    t_env_node *main;
+	t_env_node	*main;
 
 	if (!env || !env->head)
 		return (1);
@@ -27,9 +27,9 @@ int	ft_env(t_env *env)
 	return (0);
 }
 
-t_env_node *create_node(char *line)
+t_env_node	*create_node(char *line)
 {
-	t_env_node *new_node;
+	t_env_node	*new_node;
 
 	new_node = malloc(sizeof(t_env_node));
 	if (!new_node)
@@ -44,14 +44,14 @@ t_env_node *create_node(char *line)
 	return (new_node);
 }
 
-void add_node_to_list(t_env *env, t_env_node *new_node)
+void	add_node_to_list(t_env *env, t_env_node *new_node)
 {
-	t_env_node *main;
+	t_env_node	*main;
 
 	if (!env->head)
 	{
 		env->head = new_node;
-		return;
+		return ;
 	}
 	main = env->head;
 	while (main->next != NULL)
@@ -59,10 +59,11 @@ void add_node_to_list(t_env *env, t_env_node *new_node)
 	main->next = new_node;
 }
 
-t_env *create_env_list(char **envt)
+t_env	*create_env_list(char **envt)
 {
-	t_env *env;
-	int i;
+	t_env		*env;
+	int			i;
+	t_env_node	*node;
 
 	env = malloc(sizeof(t_env));
 	if (!env)
@@ -73,7 +74,7 @@ t_env *create_env_list(char **envt)
 	i = 0;
 	while (envt[i])
 	{
-		t_env_node *node = create_node(envt[i]);
+		node = create_node(envt[i]);
 		if (!node)
 		{
 			free_env_list(env);
@@ -85,5 +86,3 @@ t_env *create_env_list(char **envt)
 	}
 	return (env);
 }
-
-

@@ -12,60 +12,72 @@
 
 #include "../../includes/minishell.h"
 
-void	env_swap(char **env, int i)
+void	env_del(t_env *env, int i)
 {
-	while (env[i + 1])
+	t_env_node	*tmp;
+	t_env_node	*prev;
+	int			j;
+
+	j = 0;
+	tmp = env->head;
+	prev = NULL;
+	while (j < i)
 	{
-		env[i] = env[i + 1];
-		i++;
+		prev = tmp;
+		tmp = tmp->next;
+		j++;
 	}
-	env[i] = NULL;
-	free(env[i]);
+	if (j == 0)
+		env->head = tmp->next;
+	else if (j == env->size - 1)
+		prev->next = NULL;
+	else
+		prev->next = tmp->next;
+	free(tmp->line);
+	free(tmp);
 }
 
-int	first_occurrence(char *str, char c)
+int	ft_unset_args(t_env *env, char *arg)
 {
-	int	i;
+	int			i;
+	t_env_node	*tmp;
+	int			fails;
 
-	i = 0;
-	while (str[i] && str[i] != c)
-		i++;
-	return (i);
-}
-
-static int	ft_unset_args(char **env, char *arg)
-{
-	int	i;
-	int	fails;
-
+	tmp = env->head;
 	i = 0;
 	fails = 1;
-	while (env[i])
+	while (tmp)
 	{
-		if (ft_strncmp(env[i], arg, first_occurrence(env[i], '=')) == 0)
+		if (ft_strncmp(tmp->line, arg, first_occurrence(tmp->line, '=')) == 0
+			&& (first_occurrence(tmp->line, '=') == first_occurrence(arg, '=')))
 		{
-			env_swap(env, i);
+			env_del(env, i);
+			env->size -= 1;
 			fails = 0;
+			return (0);
 		}
 		i++;
+		tmp = tmp->next;
 	}
 	return (fails);
 }
 
-int	ft_unset(char **env, char **args)
+int	ft_unset(t_env *env, char **args)
 {
 	int	i;
 	int	fails;
 
 	i = 0;
 	fails = 0;
-	(void)env;
 	while (args[i])
 	{
 		fails += ft_unset_args(env, args[i]);
 		i++;
 	}
 	if (fails)
+	{
 		return (1);
+		printf("bah gros noob");
+	}
 	return (0);
 }

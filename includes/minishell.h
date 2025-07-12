@@ -14,8 +14,10 @@
 # define MINISHELL_H
 
 # include "../libft/libft.h"
-#include "structures.h"
+# include "structures.h"
 # include "builtins.h"
+# include <readline/history.h>
+# include <readline/readline.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -76,5 +78,10 @@ void    		free_split(char **split);
 void 			free_array(char **array); // free un tableau
 void 			free_env_list(t_env *env); // free env liste chainés
 void 			free_token_list(t_token *head); // free token liste chainés
+
+// fonction cas d'erreur
+void	print_history(void);
+void	prompt(void);
+
 
 #endif
