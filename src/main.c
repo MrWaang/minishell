@@ -6,41 +6,59 @@
 /*   By: mah-ming <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 18:37:25 by tbosviel          #+#    #+#             */
-/*   Updated: 2025/06/11 19:16:47 by mah-ming         ###   ########.fr       */
+/*   Updated: 2025/07/12 15:34:36 by mah-ming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	main(int ac, char **av, char **env)
+int main(void)
 {
-	char	**args;
+    t_env *env;
+    t_env_node *node;
+    t_token *tokens;
+    t_token *current;
+    char *input = "echo $USER \"$HOME\" '$PWD'";
 
-	t_env	*c_env;
-	int		i;
-	i = 1;
-	(void)ac;
-	(void)av;
-	(void)env;
-	c_env = create_env_list(env);
-	if (!env)
-		printf("Erreur init_env");
-	args = malloc(sizeof(char *) * ac);
-	while (av[i])
-	{
-		args[i - 1] = ft_strdup(av[i]);
-		i++;
-	}
-	args[i - 1] = NULL;
-	ft_cd(c_env, args[0]);
-	ft_env(c_env);
-	i -= 1;
-	while (i >= 0)
-	{
-		free(args[i]);
-		i--;
-	}
-	free(args);
-	free_env_list(c_env);
-	return (0);
+    env = malloc(sizeof(t_env));
+    env->head = NULL;
+    env->size = 0;
+    env->c_env = NULL;
+
+    node = malloc(sizeof(t_env_node));
+    node->line = ft_strdup("USER=maxime");
+    node->next = NULL;
+    env->head = node;
+
+    node = malloc(sizeof(t_env_node));
+    node->line = ft_strdup("HOME=/home/maxime");
+    node->next = NULL;
+    env->head->next = node;
+
+    node = malloc(sizeof(t_env_node));
+    node->line = ft_strdup("PWD=/tmp");
+    node->next = NULL;
+    env->head->next->next = node;
+    tokens = tokenize(input);
+
+    expand_tokens(tokens, env, 0);
+    current = tokens;
+    while (current && current->type != TOKEN_EOF)
+    {
+        printf("[%s] ", current->value);
+        current = current->next;
+    }
+    printf("\n");
+
+    free_token_list(tokens);
+    while (env->head)
+    {
+        node = env->head;
+        env->head = env->head->next;
+        free(node->line);
+        free(node);
+    }
+    free(env);
+
+    return (0);
 }

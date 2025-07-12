@@ -9,7 +9,23 @@ CFLAGS  := -Wextra -Wall -Werror -g
 
 INCLUDE := -I ./include
 
-SRC     := main.c utils.c built_in_utils.c export_utils.c headler_read_line.c
+SRC     := main.c \
+		   utils.c \
+       built_in_utils.c \
+       export_utils.c \
+       headler_read_line.c \
+		   parsing/lexer/token_create.c \
+		   parsing/lexer/lexer.c \
+		   parsing/lexer/lexer_utils.c \
+		   parsing/lexer/quote_utils.c \
+		   parsing/lexer/quote.c \
+		   parsing/expansion/expand_manager.c \
+		   parsing/expansion/expand_quotes.c \
+       parsing/expansion/expand_vars.c \
+       parsing/expansion/expand_utils.c \
+       parsing/expansion/expand_split.c \
+       parsing/expansion/expand_split_utils.c \
+
 
 BI		:= cd.c \
 		   pwd.c \
@@ -37,7 +53,7 @@ $(NAME): $(OBJ) $(OBJ_BI)
 	@$(CC) $(OBJ) $(OBJ_BI) $(LIB.A) -lreadline -o $(NAME) && printf "$(GREEN)✔️ $(NAME)$(NC) compiled\n"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -o $@ -c $< $(INCLUDE) && printf "$(GREEN)✔️ $(notdir $<)$(NC) compiled\n"
 
 $(OBJ_DIR)/%.o: $(BI_DIR)/%.c
