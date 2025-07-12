@@ -78,15 +78,15 @@ void	update_pwd(t_env *env)
 {
 	char		*pwd;
 	t_env_node	*tmp;
+	char		cwd[PATH_MAX + 1];
 
-	char cwd[100]; // FIX je sais pas
 	tmp = env->head;
 	update_oldpwd(env);
 	while (tmp)
 	{
 		if (its_env(tmp->line, "PWD", '=') == 0)
 		{
-			pwd = getcwd(cwd, 100);
+			pwd = getcwd(cwd, PATH_MAX + 1);
 			free(tmp->line);
 			tmp->line = NULL;
 			tmp->line = ft_strjoin("PWD=", pwd);

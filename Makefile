@@ -7,13 +7,16 @@ BI_DIR  := $(SRC_DIR)/built-in
 CC      := clang
 CFLAGS  := -Wextra -Wall -Werror -g
 
-INCLUDE := -I ./include
+INCLUDE := -I includes
 
 SRC     := main.c \
 		   utils.c \
        built_in_utils.c \
        export_utils.c \
        headler_read_line.c \
+       find_cmd_path.c \
+       redirections.c \
+       ft_exec.c \
 		   parsing/lexer/token_create.c \
 		   parsing/lexer/lexer.c \
 		   parsing/lexer/lexer_utils.c \
@@ -25,7 +28,6 @@ SRC     := main.c \
        parsing/expansion/expand_utils.c \
        parsing/expansion/expand_split.c \
        parsing/expansion/expand_split_utils.c \
-
 
 BI		:= cd.c \
 		   pwd.c \

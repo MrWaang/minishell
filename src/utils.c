@@ -34,6 +34,8 @@ void	free_env_list(t_env *env)
 
 	if (!env)
 		return ;
+	if (env->c_env)
+		free_array(env->c_env);
 	main = env->head;
 	while (main)
 	{

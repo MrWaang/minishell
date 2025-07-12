@@ -16,11 +16,14 @@
 # include "../libft/libft.h"
 # include "structures.h"
 # include "builtins.h"
+# include <fcntl.h>
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <sys/wait.h>
 # include <unistd.h>
+# include <limits.h>
 
 // lexer
 t_token         *tokenize(char *line);
@@ -80,8 +83,19 @@ void 			free_env_list(t_env *env); // free env liste chainés
 void 			free_token_list(t_token *head); // free token liste chainés
 
 // fonction cas d'erreur
-void	print_history(void);
-void	prompt(void);
 
+//FIX A RANGER
+void	print_history(void);
+void	ft_readline(char *prompt, char *input);
+char	*find_cmd_path(char *cmd, char **env);
+int		is_built_in(char *cmd);
+int		built_in_handler(char *cmd, char **args, t_env *env);
+void	redir_out(char *filename);        // >
+void	redir_out_append(char *filename); // >>
+void	redir_in(char *filename);
+void	env_array(t_env *list);
+char	*is_expand(t_env *env, char *str);
+void ft_exec(t_data *data, char **cmd, char **env);
+void heredoc(char *delimiter);
 
 #endif

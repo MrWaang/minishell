@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   headler_read_line.c                                :+:      :+:    :+:   */
+/*   handler_read_line.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbosviel <marvin@d42.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 12:22:11 by tbosviel          #+#    #+#             */
-/*   Updated: 2025/06/25 12:22:11 by tbosviel         ###   ########.fr       */
+/*   Updated: 2025/07/03 15:44:48 by tbosviel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,11 @@ void	print_history(void)
 	}
 }
 
-void	prompt(void)
+void	ft_readline(char *prompt, char *input)
 {
-	char	*input;
-
 	while (1)
 	{
-		input = readline(">> ");
+		input = readline(prompt);
 		if (!input)
 			break ;
 		if (*input)

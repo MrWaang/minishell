@@ -11,54 +11,63 @@
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+#include <libft/ft_printf.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
 
 int main(void)
 {
-    t_env *env;
-    t_env_node *node;
-    t_token *tokens;
-    t_token *current;
-    char *input = "echo $USER \"$HOME\" '$PWD'";
+	char	**args;
+	t_env	*c_env;
+	int		i;
 
-    env = malloc(sizeof(t_env));
-    env->head = NULL;
-    env->size = 0;
-    env->c_env = NULL;
-
-    node = malloc(sizeof(t_env_node));
-    node->line = ft_strdup("USER=maxime");
-    node->next = NULL;
-    env->head = node;
-
-    node = malloc(sizeof(t_env_node));
-    node->line = ft_strdup("HOME=/home/maxime");
-    node->next = NULL;
-    env->head->next = node;
-
-    node = malloc(sizeof(t_env_node));
-    node->line = ft_strdup("PWD=/tmp");
-    node->next = NULL;
-    env->head->next->next = node;
-    tokens = tokenize(input);
-
-    expand_tokens(tokens, env, 0);
-    current = tokens;
-    while (current && current->type != TOKEN_EOF)
-    {
-        printf("[%s] ", current->value);
-        current = current->next;
-    }
-    printf("\n");
-
-    free_token_list(tokens);
-    while (env->head)
-    {
-        node = env->head;
-        env->head = env->head->next;
-        free(node->line);
-        free(node);
-    }
-    free(env);
-
-    return (0);
+	i = 1;
+	(void)ac;
+	(void)env;
+	c_env = create_env_list(env);
+	if (!env)
+		printf("Erreur init_env");
+	args = malloc(sizeof(char *) * ac);
+	while (av[i])
+	{
+		args[i - 1] = ft_strdup(av[i]);
+		i++;
+	}
+	args[i - 1] = NULL;
+	// if (is_built_in(cmd) == 1)
+	// {
+		// built_in_headler(cmd, args, c_env);
+	// }
+	// ft_env(c_env);
+	// char *path = find_cmd_path(args[0], env);
+	// if (path)
+	// {
+		// printf("%s", path);
+		// free(path);
+	// }
+	// t_data *data;
+	// data = malloc(sizeof(t_data));
+	// data->fd_tmp = -1;
+	// char *arg[] = {"grep", "^d", NULL};
+	// char *arg2[] = {"wc", "-l", NULL};
+	// data->blocks = 3;
+	// data->blocks_pos = 1;
+	// ft_exec(data, args, env);
+	// data->blocks_pos = 2;
+	// ft_exec(data, arg, env);
+	// data->blocks_pos = 3;
+	// ft_exec(data, arg2, env);
+	// close(data->fd_tmp);
+	// free(data);
+	heredoc(args[0]);
+	i -= 1;
+	while (i >= 0)
+	{
+		free(args[i]);
+		i--;
+	}
+	free(args);
+	free_env_list(c_env);
+	return (0);
 }

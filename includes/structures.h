@@ -34,6 +34,13 @@ typedef enum token_type
 	TOKEN_EOF        // fin de ligne
 }						t_token_type;
 
+typedef struct s_data
+{
+	int blocks; // nombres de blocs de commandes
+	int	blocks_pos; // la position du bloc de commande actuel
+	int fd_tmp;
+}						t_data;
+
 typedef struct s_token
 {
 	char 			*value; // valeur, echo, >>, ...
