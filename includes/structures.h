@@ -6,7 +6,7 @@
 /*   By: mah-ming <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 19:20:36 by mah-ming          #+#    #+#             */
-/*   Updated: 2025/07/20 17:58:26 by mah-ming         ###   ########.fr       */
+/*   Updated: 2025/07/03 21:49:40 by mah-ming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,13 @@ typedef enum token_type
 	TOKEN_EOF        // fin de ligne
 }						t_token_type;
 
+typedef struct s_data
+{
+	int blocks; // nombres de blocs de commandes
+	int	blocks_pos; // la position du bloc de commande actuel
+	int fd_tmp;
+}						t_data;
+
 typedef struct s_token
 {
 	char 			*value; // valeur, echo, >>, ...
@@ -49,19 +56,3 @@ typedef enum e_quote_state
     QUOTE_SINGLE,
     QUOTE_DOUBLE
 }   t_quote_state;
-
-typedef struct s_redir
-{
-    t_token_type    type;       // type de redir
-    char            *file;      // file
-    char            *delimiter; // heredoc
-    struct s_redir  *next;
-}   t_redir;
-
-typedef struct s_cmd
-{
-    char            **args;     // args
-    int             arg_count;  // nbr d'arg
-    t_redir         *redirs;    // liste des redir
-    struct s_cmd    *next;      // pipe
-}   t_cmd;
