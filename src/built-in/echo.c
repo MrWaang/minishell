@@ -17,7 +17,7 @@ int	ft_echo(char **args)
 	int	i;
 	int	n_option;
 
-	i = 0;
+	i = 1;
 	n_option = 0;
 	while (args[i] && ft_n_option(args[i]))
 	{

@@ -7,16 +7,13 @@ BI_DIR  := $(SRC_DIR)/built-in
 CC      := clang
 CFLAGS  := -Wextra -Wall -Werror -g
 
-INCLUDE := -I includes
+INCLUDE := -I ./include
 
 SRC     := main.c \
 		   utils.c \
-       built_in_utils.c \
-       export_utils.c \
-       headler_read_line.c \
-       find_cmd_path.c \
-       redirections.c \
-       ft_exec.c \
+		   built_in_utils.c \
+		   export_utils.c \
+		   prompt.c \
 		   parsing/lexer/token_create.c \
 		   parsing/lexer/lexer.c \
 		   parsing/lexer/lexer_utils.c \
@@ -24,10 +21,31 @@ SRC     := main.c \
 		   parsing/lexer/quote.c \
 		   parsing/expansion/expand_manager.c \
 		   parsing/expansion/expand_quotes.c \
-       parsing/expansion/expand_vars.c \
-       parsing/expansion/expand_utils.c \
-       parsing/expansion/expand_split.c \
-       parsing/expansion/expand_split_utils.c \
+		   parsing/expansion/expand_vars.c \
+		   parsing/expansion/expand_utils.c \
+		   parsing/expansion/expand_split.c \
+		   parsing/expansion/expand_split_utils.c \
+		   parsing/syntax/syntax_checker.c \
+		   parsing/syntax/syntax_error.c \
+		   parsing/syntax/syntax_pipe.c \
+		   parsing/syntax/syntax_redir.c \
+		   parsing/syntax/syntax_utils.c \
+		   parsing/parser/arg_collector.c \
+		   parsing/parser/cmd_builder.c \
+		   parsing/parser/parser_utils.c \
+		   parsing/parser/parser.c \
+		   parsing/parser/redir_parser.c \
+		   exec/executor.c \
+           exec/exec_cmd.c \
+           exec/exec_builtin.c \
+           exec/exec_external.c \
+           exec/exec_pipes.c \
+           exec/redirections.c \
+           exec/heredoc.c \
+           exec/path_finder.c \
+           exec/signals.c \
+           exec/wait_process.c \
+
 
 BI		:= cd.c \
 		   pwd.c \
